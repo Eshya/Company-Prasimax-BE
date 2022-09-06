@@ -1,0 +1,64 @@
+carousel:[
+    {
+        src:"",
+    },{
+        src:"",
+    },{
+        src:"",
+    },{
+        src:"",
+    }
+],
+productstitle:{
+    judul:"",
+    subtitle:"",     
+}
+product:[{
+        image:"",
+        title:"",
+        link:""
+    },{
+        image:"",
+        title:"",
+        link:""
+    },{
+        image:"",
+        title:"",
+        link:""
+    }],
+titleAbout:{
+    judul:"",
+    subtitle:"",
+    image:"",
+},
+about: [{
+        title:"",
+    },{
+        title:"",
+    },{
+        title:"",
+    }],
+informationtitle:{
+    judul:"",
+    subtitle:""
+}
+serviceinovate:{
+    image: "http://"
+    detail: [{
+            image:"",
+            title:"",
+            description:""
+        },
+        {
+            image:"",
+            title:"",
+            description:""
+        }
+    ],   
+}
+technical: {
+    date:"",
+    image:"",
+    title:"",
+    description:""
+}
