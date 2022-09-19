@@ -7,5 +7,7 @@ const c = require('./user.controller');
 router.post('/signup', schemaCek(schema), after, c.register);
 router.get('/',auth, queryCek, c.findAll);
 router.get('/:id',auth, queryCek, c.findId);
+router.put('/activate-email/:token',auth,c.activate);
 router.delete('/:id',auth,queryCek,c.removeById)
+
 module.exports = router

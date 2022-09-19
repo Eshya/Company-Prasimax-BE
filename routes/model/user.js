@@ -38,6 +38,15 @@ module.exports = function(sequelize, DataTypes) {
     isSubscribe: {
       type: DataTypes.BOOLEAN,
       allowNull: false
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: 0
+    },
+    Activatedtoken: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   }, {
     sequelize,
