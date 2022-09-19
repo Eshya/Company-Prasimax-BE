@@ -10,11 +10,15 @@ module.exports = function(sequelize, DataTypes) {
     title: {
       type: DataTypes.STRING(255),
       allowNull: false
+    },
+    subtitle: {
+      type: DataTypes.STRING(100),
+      allowNull: true
     }
   }, {
     sequelize,
     tableName: 'about',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",

@@ -10,15 +10,11 @@ module.exports = function(sequelize, DataTypes) {
     image: {
       type: DataTypes.STRING(255),
       allowNull: false
-    },
-    detailId: {
-      type: DataTypes.INTEGER,
-      allowNull: true
     }
   }, {
     sequelize,
     tableName: 'serviceinovate',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",

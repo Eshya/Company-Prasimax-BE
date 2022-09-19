@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    image: {
+    imageDetail: {
       type: DataTypes.STRING(255),
       allowNull: false
     },
@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'serviceinovateDetail',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",

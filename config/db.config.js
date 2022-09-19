@@ -5,21 +5,21 @@ const readEnv = new ReadEnv();
 
 
 
-    const sequelize = new Sequelize( readEnv.get("DB_DATABASE"), readEnv.get("DB_USERNAME"), readEnv.get("DB_PASSWORD"), {
-        host: readEnv.get("DB_HOST"),
-        port: readEnv.get("DB_PORT"),
-        dialect: "mysql",
-        operatorsAliases: false,
-        // pool: {
-        //     max: 5,
-        //     min: 0,
-        //     acquire: 30000,
-        //     idle: 10000
-        //   }
-    });
-    const db = {};
-    db.Sequelize = Sequelize;
-    db.sequelize = sequelize;
+const sequelize = new Sequelize( readEnv.get("DB_DATABASE"), readEnv.get("DB_USERNAME"), readEnv.get("DB_PASSWORD"), {
+    host: readEnv.get("DB_HOST"),
+    port: readEnv.get("DB_PORT"),
+    dialect: "mysql",
+    operatorsAliases: false,
+    // pool: {
+    //     max: 5,
+    //     min: 0,
+    //     acquire: 30000,
+    //     idle: 10000
+    //   }
+});
+const db = {};
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
     //db.nlp_data_training = require(`../model/intern_2022/nlp_data_training`)(sequelize, Sequelize.DataTypes);
  
 

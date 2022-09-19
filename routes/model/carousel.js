@@ -7,14 +7,22 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    src: {
+    image: {
       type: DataTypes.STRING(255),
+      allowNull: false
+    },
+    title: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    subtitle: {
+      type: DataTypes.STRING(100),
       allowNull: false
     }
   }, {
     sequelize,
     tableName: 'carousel',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",

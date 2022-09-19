@@ -11,18 +11,26 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(255),
       allowNull: false
     },
-    title: {
+    name: {
       type: DataTypes.STRING(255),
       allowNull: false
     },
-    link: {
+    category: {
       type: DataTypes.STRING(255),
       allowNull: false
+    },
+    status: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    keterangan: {
+      type: DataTypes.STRING(100),
+      allowNull: true
     }
   }, {
     sequelize,
     tableName: 'product',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",

@@ -1,23 +1,22 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('informationtitle', {
-    id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
+  return sequelize.define('Sessions', {
+    session_id: {
+      type: DataTypes.STRING(32),
       allowNull: false,
       primaryKey: true
     },
-    judul: {
-      type: DataTypes.STRING(255),
-      allowNull: false
+    expires: {
+      type: DataTypes.DATE,
+      allowNull: true
     },
-    subtitle: {
-      type: DataTypes.STRING(255),
-      allowNull: false
+    data: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'informationtitle',
+    tableName: 'Sessions',
     timestamps: true,
     indexes: [
       {
@@ -25,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "id" },
+          { name: "session_id" },
         ]
       },
     ]
