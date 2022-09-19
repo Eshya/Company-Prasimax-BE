@@ -87,10 +87,10 @@ if (!fs.existsSync(`${process.cwd()}/upload/service`)){
 const files = fs.readdirSync(`${__dirname}/upload`);
 files.forEach((static)=>{
       debug(static);
-      app.use(`/upload/${static}`,express.static(path.resolve(__dirname,'upload',static)));
+      app.use(`/company-be/upload/${static}`,express.static(path.resolve(__dirname,'upload',static)));
 
 });
-app.all('/*', (req, res, next) => {
+app.all('/company-be/*', (req, res, next) => {
     res.sendFile('index.html', {root: staticFile});
 })
 module.exports = app;
