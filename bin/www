@@ -4,12 +4,12 @@ var debug = require('debug')('prasimax-server:server');
 var http = require('http');
 const ReadEnv = require("../utils/readEnv").ReadEnv
 const readEnv = new ReadEnv();
-var port = normalizePort(readEnv.get("PORT_BACKEND"));
-app.set('port', port);
+//var port = normalizePort(readEnv.get("PORT_BACKEND"));
+//app.set('port', port);
 
 var server = http.createServer(app);
 
-server.listen(port);
+//server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
