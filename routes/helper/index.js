@@ -9,7 +9,7 @@ const verifyToken = async (req, res, next) => {
     try {
         const token = req.headers['authorization']
         console.log(req.headers['authorization'])
-        if(!token) return res.status(401).json('Unauthorize')
+        if(!token) return res.status(401).json('Unauthorized')
         const decode = await jwt.verify(token.split(' ')[1], readEnv.get("JWT_SECRET"))
         req.user = decode
         next()

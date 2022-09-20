@@ -14,5 +14,4 @@ Use This Command To Add Another Database
 
 ``` sequelize-auto -o "./routes/model" -d DBNAME -h HOST -u USER -p PORT -x PASSWORD -e mysql -a "./config/config.json" ```
 
-``` pm2 start npm --name "{app_name}" -- run {script_name}
-```
+```  pm2 start npm --name "{app_name}" -- run {script_name}```

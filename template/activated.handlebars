@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Chickin</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .type20 {
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 32px;
+            letter-spacing: 0em;
+            text-align: left;
+        }
+
+        .type16 {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 26px;
+            letter-spacing: 0em;
+            text-align: left;
+        }
+
+        .type13 {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 21px;
+            letter-spacing: 0em;
+            text-align: left;
+        }
+
+        .black-300 {
+            color: #3D3D3D;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .btn {
+            background: #30495F;
+            box-shadow: 0px 16px 16px rgba(0, 0, 0, 0.04);
+            border-radius: 16px;
+            color: white;
+            padding: 12px 24px 12px 24px;
+            display: block;
+            text-align: center;
+        }
+
+        .box {
+            border: 1px solid #E6E6E6;
+            border-radius: 16px 16px 0 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 40px;
+            position: relative;
+        }
+
+        .box-footer {
+            background: #F0F0F0;
+            border-radius: 0 0 16px 16px;
+            padding: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="box">
+            <img src="https://prasimax.com/company-be/800px-Prasimax_Logo.png" style="margin-top: -40px; height: 180px;width:400px" alt="logo prasimax">
+            <div style="height: 4px; background: linear-gradient(291.34deg, #324552 0%, #4B677A 100%); position: absolute; width: 100%; left: 0px; margin-top: 10px;">
+            </div>
+            <div>
+                <h1 class="type20 black-300" style="margin-top: 40px;">Hi, {{ name }}</h1>
+                <p class="type16 black-300">
+                    Akun anda sudah aktif</b> <br>
+                </p>
+                <p class="type16 black-300">Jika masih terkendala saat Login, silahkan hubungi Prasimax.
+                </p>
+            </div>
+        </div>
+        <div class="box box-footer">
+            <div>
+                <img src="https://prasimax.com/company-be/800px-Prasimax_Logo.png" style="margin-top: -40px; height: 80px;" alt="logo chickin">
+            </div>
+            <div>
+                <p class="type16 black-300" style="font-weight: 600;"> PT. Prasimax Inovasi Teknologi</p>
+                <p class="type13 black-300">© 2010. All Right Reserved</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
