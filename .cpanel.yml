@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/u1602224/Company-Prasimax-BE
+    - /bin/cp -R * $DEPLOYPATH
