@@ -83,18 +83,18 @@ exports.activate = async (req, res, next) =>{
         const isInvalid = await User.findOne({resetPasswordToken: req.query.token});
         
         if (!isInvalid) return res.send(createError(403, 'Token tidak valid'))
-        await User.update({isActive: true, Activatedtoken: null},{where:{id:isInvalid.id}});
         smtpTransport.use('compile', hbs(handlebarOptions))
 
         mailOptions.to = isInvalid.email
         mailOptions.subject = `[No-Reply] Akun Telah Diaktivasi`
         mailOptions.template = 'activated'
         mailOptions.context = {
-            name: isInvalid.username,
-            password: req.body.password
+            name: isInvalid.username
         }
         const isSent = await smtpTransport.sendMail(mailOptions)
         if(!isSent) return res.send(createError(500, 'Gagal mengirimkan email aktivasi akun'))
+        await User.update({isActive: true, Activatedtoken: null},{where:{id:isInvalid.id}});
+        
         res.json({
             message: `Permintaan aktivasi [${isInvalid.email}] berhasil`
         })
