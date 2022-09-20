@@ -3,10 +3,11 @@ const db = require('../../../config/db.config')
 const passwordHash = require('password-hash');
 const User = initModels(db.sequelize).user
 const crypto = require('crypto')
+const path = require('path')
 const nodemailer = require('nodemailer')
 const hbs = require('nodemailer-express-handlebars')
 const {createError} = require('../../helper');
-const { where } = require("sequelize/types");
+
 const _beforeSave = (data) => {
     if(data.username) {
         data.username = data.username.toLowerCase()
@@ -32,10 +33,10 @@ const mailOptions = {
   })
 const handlebarOptions = {
     viewEngine: {
-        partialsDir: path.resolve('./template/'),
+        partialsDir: path.resolve(`${process.cwd()}/template/`),
         defaultLayout: false,
     },
-    viewPath: path.resolve('./template/'),
+    viewPath: path.resolve(`${process.cwd()}/template/`),
 };
 const getProtocol = (req) => {
     var proto = req.connection.encrypted ? 'https' : 'http';
@@ -51,7 +52,7 @@ exports.register = async (req, res, next) => {
         const randomText = await crypto.randomBytes(20);
         const token = randomText.toString('hex');
         const protocol = getProtocol(req)
-        const url = `${protocol}://${req.get('host')}/activate-email?token=${token}`
+        const url = `${protocol}://${req.get('host')}/api/user/activate-email?token=${token}`
         smtpTransport.use('compile', hbs(handlebarOptions))
         mailOptions.to = email
         mailOptions.subject = '[No-Reply] Aktivasi Akun '
@@ -75,30 +76,66 @@ exports.register = async (req, res, next) => {
         next(err)
     }
 }
-exports.activate = async (req, res, next) =>{
-try{
-    const isInvalid = await Model.findOne({resetPasswordToken: req.params.token});
-    if (!isInvalid) return next(createError(403, 'Token tidak valid'))
-    const user = await Model.update({isActive: true, Activatedtoken: null},{where:{id:isInvalid.id}});
-    smtpTransport.use('compile', hbs(handlebarOptions))
 
-    mailOptions.to = user.email
-    mailOptions.subject = `[No-Reply] Akun Telah Diaktivasi`
-    mailOptions.template = 'activated'
-    mailOptions.context = {
-        name: user.username,
-        password: req.body.password
+exports.activate = async (req, res, next) =>{
+    try{
+        
+        const isInvalid = await User.findOne({resetPasswordToken: req.query.token});
+        
+        if (!isInvalid) return res.send(createError(403, 'Token tidak valid'))
+        await User.update({isActive: true, Activatedtoken: null},{where:{id:isInvalid.id}});
+        smtpTransport.use('compile', hbs(handlebarOptions))
+
+        mailOptions.to = isInvalid.email
+        mailOptions.subject = `[No-Reply] Akun Telah Diaktivasi`
+        mailOptions.template = 'activated'
+        mailOptions.context = {
+            name: isInvalid.username,
+            password: req.body.password
+        }
+        const isSent = await smtpTransport.sendMail(mailOptions)
+        if(!isSent) return res.send(createError(500, 'Gagal mengirimkan email aktivasi akun'))
+        res.json({
+            message: `Permintaan aktivasi [${isInvalid.email}] berhasil`
+        })
     }
-    const isSent = await smtpTransport.sendMail(mailOptions)
-    if(!isSent) return next(createError(500, 'Gagal mengirimkan email aktivasi akun'))
-    res.json({
-        message: `Permintaan aktivasu [${user.email}] berhasil`
-    })
+    catch(error){
+        res.send(createError(400, error));
+        next(error)
+    }
+    
+      
 }
-catch(error){
-    res.send(createError(400, error));
-    next(err)
-}
+exports.resend = async (req, res, next) =>{
+    try{
+        const isInvalid = await User.findOne({email: req.params.email});
+        
+        if (!isInvalid) return res.send(createError(403, 'email tidak valid'))
+        const randomText = await crypto.randomBytes(20);
+        const token = randomText.toString('hex');
+        await User.update({Activatedtoken: token},{where:{id:isInvalid.id}});
+        
+        const protocol = getProtocol(req)
+        const url = `${protocol}://${req.get('host')}/api/user/activate-email?token=${token}`
+        
+        smtpTransport.use('compile', hbs(handlebarOptions))
+        mailOptions.to = req.params.email
+        mailOptions.subject = '[No-Reply] Aktivasi Akun '
+        mailOptions.template = 'activate-email';
+        mailOptions.context = {
+            name: isInvalid.username,
+            url
+        }
+        const isSent = await smtpTransport.sendMail(mailOptions)
+        if(!isSent) return res.send(createError(500, 'Gagal mengirimkan email aktivasi'))
+        res.json({
+            message: `Permintaan aktivasi [${req.params.email}] berhasil dikirim ulang`
+        })
+    }
+    catch(error){
+        res.send(createError(400, error));
+        next(error)
+    }
     
       
 }
