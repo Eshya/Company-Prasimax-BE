@@ -21,14 +21,14 @@ const mailOptions = {
     from: 'donotreply@prasimax.com',
   }
   const smtpTransport = nodemailer.createTransport({
-    host: "srv127.niagahoster.com",
+    host: "",
     tls: {
         rejectUnauthorized: false
     },
     port: 465,
     auth: {
-      user: 'donotreply@prasimax.com',
-      pass: 'Company123!@#',
+      user: '',
+      pass: '',
     }
   })
 const handlebarOptions = {
